@@ -21,7 +21,7 @@ static
 u16 validate_number_u16(u16 uv)
 {
 	if( (uv & 0x00008000) == 0x00008000 )
-		uv = !(uv & 0x0000FFFF);
+		uv = !(uv & 0x0000FFFF) + 1;
 	return uv;
 }
 
@@ -29,7 +29,7 @@ static
 u8 validate_number_u8(u8 uv)
 {
 	if( (uv & 0x0000080) == 0x00000080 )
-		uv = !(uv & 0x000000FF);
+		uv = !(uv & 0x000000FF) + 1;
 	return uv;
 }
 
