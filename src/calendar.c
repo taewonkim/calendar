@@ -160,7 +160,8 @@ long get_passed_days(u8 m, u16 y)
 	if(leap_year == true)
 		_set_days_in_month(1, 29);
 	else
-		_set_days_in_month(1, 28);
+		if( _set_days_in_month(1) != 28 )
+			_set_days_in_month(1, 28);
 
 	yy = _yy_passed_days(validate_number_u16(y));
 	mm = _mm_passed_days(validate_number_u8(m));
