@@ -7,6 +7,26 @@ static u8 DAYS_IN_MONTH[12] = {
 	31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
 };
 
+static
+u32 validate_number_u32(u32 v)
+{
+	if( v < 0 )
+		v = !(value & 0xFFFFFFFF) + 1;
+	return v;
+}
+
+static
+u16 validate_number_u16(u16 v)
+{
+	return (u16) validate_number_u32(value);
+}
+
+static
+u8 validate_number_u8(u8 v)
+{
+	return (u8)  validate_number_u16(value);
+}
+
 /**
  * Get length DAYS_IN_MONTH array.
  */
@@ -88,7 +108,7 @@ bool _leap_year(u8 y)
 }
 
 static 
-long _yy_passed_days(u8 y)
+long _yy_passed_days(u16 y)
 {
 	long passed_days = 0;
 	passed_days  = (y - 1) * 365;
