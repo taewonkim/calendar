@@ -3,6 +3,7 @@
 
 #define INVALID_VALUE	255
 
+#define MAX_MONTH_SIZE	 12
 #define WEEK_OF_SIZE	  3
 
 // redefine   signed type.
