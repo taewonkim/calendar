@@ -7,6 +7,7 @@ static u8 DAYS_IN_MONTH[12] = {
 	31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
 };
 
+/*
 static
 u32 validate_number_u32(u32 uv)
 {
@@ -14,6 +15,7 @@ u32 validate_number_u32(u32 uv)
 		uv = !(uv & 0xFFFFFFFF) + 1;
 	return uv;
 }
+*/
 
 static
 u16 validate_number_u16(u16 uv)
