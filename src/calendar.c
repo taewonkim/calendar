@@ -104,12 +104,10 @@ void _set_days_in_month(u8 iv, u8 uv)
 
 u8 _get_days_in_month(u8 iv)
 {
-	u8 uv = 0;
 	iv = validate_number_u8(iv);
 	if( _any_days_in_month(iv) == true )
 		return (u8) INVALID_VALUE;
-	uv = validate_number_u8( DAYS_IN_MONTH[iv] );
-	return uv;
+	return validate_number_u8( DAYS_IN_MONTH[iv] );
 }
 
 static
