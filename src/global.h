@@ -5,6 +5,16 @@
 
 #define WEEK_OF_SIZE	 3
 
+// redefine   signed type.
+typedef signed   char  s8;
+typedef signed   short s16;
+typedef signed   int   s32;
+
+// redefine unsigned type.
+typedef unsigned char  u8;
+typedef unsigned short u16;
+typedef unsigned int   u32;
+
 // I defined BOOL type, 
 // Because C Language is not supported Boolean type.
 enum BOOL {
