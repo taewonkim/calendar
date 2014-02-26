@@ -1,4 +1,5 @@
 #include <string.h>
+
 #include "global.h"
 #include "calendar.h"
 
