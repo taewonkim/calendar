@@ -6,9 +6,9 @@
 
 int main(int argc, char** argv)
 {
-	int yy = 0, mm = 0, dd = 0;
-	int week_number = 0;
-	char* week_name = (char*) malloc( WEEK_OF_SIZE );
+	u8 yy = 0, mm = 0, dd = 0;
+	u8  week_number = 0;
+	u8* week_name = (u8*) malloc( WEEK_OF_SIZE );
 
 	printf("YYYY = ");
 	scanf("%d", &yy);
