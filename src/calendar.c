@@ -143,13 +143,13 @@ long _mm_passed_days(u8 m)
 	u8 i = 0, tmp_passed = 0;
 	long passed_days = 0;
 	m--;
-	do {
+	while(i < m) {
 		tmp_passed = _get_days_in_month(i);
 		if( tmp_passed == INVALID_VALUE )
 			break;
 		passed_days += tmp_passed;	
 		i++;
-	} while(i < m);
+	}
 	return passed_days;
 }
 
