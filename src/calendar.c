@@ -8,9 +8,8 @@ u8 DAYS_IN_MONTH[12] = {
 	31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
 };
 
-u32 shift_bits(u32 uv, shift bits)
+u32 shift_bits(u32 uv, shift udir)
 {
-	
 }
 
 #if 0
