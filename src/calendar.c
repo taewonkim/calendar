@@ -20,16 +20,16 @@ u32 validate_number_u32(u32 uv)
 static
 u16 validate_number_u16(u16 uv)
 {
-	if( (uv & 0x00008000) == 0x00008000 )
-		uv = !(uv & 0x0000FFFF) + 1;
+	if( (uv & 0x8000) == 0x8000 )
+		uv = 0xFFFF - (uv & 0xFFFF) + 1;
 	return uv;
 }
 
 static
 u8 validate_number_u8(u8 uv)
 {
-	if( (uv & 0x0000080) == 0x00000080 )
-		uv = !(uv & 0x000000FF) + 1;
+	if( (uv & 0x80) == 0x80 )
+		uv = 0xFF - (uv & 0xFF) + 1;
 	return uv;
 }
 
@@ -156,12 +156,13 @@ long get_passed_days(u8 m, u16 y)
 	u32 yy = 0, mm = 0;
    	bool leap_year = false;
 
-	leap_year = _leap_year(validate_number_u16(y));
+   	y = validate_number_u16(y);
+	leap_year = _leap_year(y);
 	if(leap_year == true)
-		_set_days_in_month(1, 29);
+		_set_days_in_month(1, DAYS_LEAP_MONTH_TWO);
 	else
-		if( _get_days_in_month(1) != 28 )
-			_set_days_in_month(1, 28);
+		if( _get_days_in_month(1) != DAYS_NORM_MONTH_TWO )
+			_set_days_in_month(1, DAYS_NORM_MONTH_TWO);
 
 	yy = _yy_passed_days(validate_number_u16(y));
 	mm = _mm_passed_days(validate_number_u8(m));
@@ -174,6 +175,7 @@ u8 number_of_week(u8 d, u8 m, u16 y)
 	long days = get_passed_days(
 		validate_number_u8(m), 
 		validate_number_u16(y));
+	d = validate_number_u8(d);
 	return (days + d) % 7;
 }
 
