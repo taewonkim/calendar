@@ -61,7 +61,7 @@ bool _leap_year(int y)
 	     y2 = (y % 100) != 0 ? true : false,
 	     y3 = (y % 400) == 0 ? true : false;
 	if( ((y1 == true) || (y2 != true)) && 
-	    (y3 == true))
+	     (y3 == true))
 		return true;
 	else
 		return false;
