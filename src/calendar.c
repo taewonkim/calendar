@@ -11,7 +11,7 @@ static u8 DAYS_IN_MONTH[12] = {
  * Get length DAYS_IN_MONTH array.
  */
 static
-u8 _length_days_in_month()
+u8 _count_of_days_in_month()
 {
 	return (u8) ( sizeof( DAYS_IN_MONTH ) / sizeof( u8 ) );
 }
@@ -23,7 +23,12 @@ u8 _length_days_in_month()
 static
 bool _overflow_days_in_month(u8 index)
 {
-	u8 count = _length_days_in_month();
+	u8 count = _count_of_days_in_month();
+	// If count variable is over MAX_MONTH_COUNT (12)?
+	// Oh my god!
+	// It happens, Not GOOD!
+	if( count > MAX_MONTH_COUNT )
+		return false;
 	count--;
 	return (index > count) ? true : false;
 }
