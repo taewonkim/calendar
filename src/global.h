@@ -8,7 +8,7 @@
 // I defined BOOL type, 
 // Because C Language is not supported Boolean type.
 enum BOOL {
-	false, true
+	false = 0, true
 };
 
 typedef enum BOOL bool;
