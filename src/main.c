@@ -6,14 +6,16 @@
 
 int main(int argc, char** argv)
 {
-	u8 yy = 0, mm = 0, dd = 0;
+	int yy = 0, mm = 0, dd = 0;
 	u8  week_number = 0;
-	u8* week_name = (u8*) malloc( WEEK_OF_SIZE );
+	char* week_name = (char *) malloc( WEEK_OF_SIZE );
 
 	printf("YYYY = ");
 	scanf("%d", &yy);
+
 	printf("  MM = ");
 	scanf("%d", &mm);
+
 	printf("  DD = ");
 	scanf("%d", &dd);
 

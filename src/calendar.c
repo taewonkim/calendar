@@ -1,5 +1,4 @@
 #include <string.h>
-
 #include "global.h"
 #include "calendar.h"
 
@@ -8,23 +7,23 @@ static u8 DAYS_IN_MONTH[12] = {
 };
 
 static
-u32 validate_number_u32(u32 v)
+u32 validate_number_u32(u32 uv)
 {
-	if( v < 0 )
-		v = !(v & 0xFFFFFFFF) + 1;
-	return v;
+	if( uv < 0 )
+		uv = !(uv & 0xFFFFFFFF) + 1;
+	return uv;
 }
 
 static
-u16 validate_number_u16(u16 v)
+u16 validate_number_u16(u16 uv)
 {
-	return (u16) validate_number_u32(v);
+	return (u16) validate_number_u32(uv);
 }
 
 static
-u8 validate_number_u8(u8 v)
+u8 validate_number_u8(u8 uv)
 {
-	return (u8)  validate_number_u16(v);
+	return (u8)  validate_number_u16(uv);
 }
 
 /**
@@ -41,7 +40,7 @@ u8 _count_of_days_in_month()
  * I don't allow index over then (DAYS_IN_MONTH-1) length.
  */
 static
-bool _overflow_days_in_month(u8 index)
+bool _overflow_days_in_month(u8 iv)
 {
 	u8 count = _count_of_days_in_month();
 	// If count variable is over MAX_MONTH_COUNT (12)?
@@ -50,7 +49,8 @@ bool _overflow_days_in_month(u8 index)
 	if( count > MAX_MONTH_COUNT )
 		return false;
 	count--;
-	return (index > count) ? true : false;
+	iv = validate_number_u8(iv);
+	return (iv > count) ? true : false;
 }
 
 /**
@@ -58,9 +58,10 @@ bool _overflow_days_in_month(u8 index)
  * I don't allow index under 0 index.
  */
 static
-bool _underflw_days_in_month(u8 index)
+bool _underflw_days_in_month(u8 iv)
 {
-	return (index <     0) ? true : false;
+	iv = validate_number_u8(iv);
+	return (iv < 0) ? true : false;
 }
 
 /**
@@ -68,43 +69,46 @@ bool _underflw_days_in_month(u8 index)
  * When any result value is true, I feel Bad status.
  */
 static
-bool _any_days_in_month(u8 index)
+bool _any_days_in_month(u8 iv)
 {
 	bool oflw = false, uflw = false;
-	if( _underflw_days_in_month(index) == true )
+	iv = validate_number_u8(iv);
+	if( _underflw_days_in_month(iv) == true )
 		oflw = true;
-	if( _overflow_days_in_month(index) == true )
-		udfw = true;
+	if( _overflow_days_in_month(iv) == true )
+		uflw = true;
 	return oflw || uflw;
 }
 
 static 
-void _set_days_in_month(u8 index, u8 value)
+void _set_days_in_month(u8 iv, u8 uv)
 {
-	index = validate_number_u8(index);
-	if( _any_days_in_month(index) == true )
+	iv = validate_number_u8(iv);
+	if( _any_days_in_month(iv) == true )
 		return ;
-	value = validate_number_u8(value);
-	DAYS_IN_MONTH[index] = value;
+	uv = validate_number_u8(uv);
+	DAYS_IN_MONTH[iv] = uv;
 }
 
 static
-u8 _get_days_in_month(u8 index)
+u8 _get_days_in_month(u8 iv)
 {
-	u8 value = 0;
-	index = validate_number_u8(index);
-	if( _any_days_in_month(index) == true )
+	u8 uv = 0;
+	iv = validate_number_u8(iv);
+	if( _any_days_in_month(iv) == true )
 		return (u8) INVALID_VALUE;
-	value = validate_number_u8( DAYS_IN_MONTH[index] );
-	return value;
+	uv = validate_number_u8( DAYS_IN_MONTH[iv] );
+	return uv;
 }
 
 static
 bool _leap_year(u16 y)
 {
-	bool y1 = (validate_number_u16(y) %   4) == 0 ? true : false,
-	     y2 = (validate_number_u16(y) % 100) != 0 ? true : false,
-	     y3 = (validate_number_u16(y) % 400) == 0 ? true : false;
+	bool y1 = false, y2 = false, y3 = false;
+	y = validate_number_u16(y);
+	y1 = (y %   4) == 0 ? true : false,
+	y2 = (y % 100) != 0 ? true : false,
+	y3 = (y % 400) == 0 ? true : false;
 	if( ((y1 == true) || (y2 != true)) && 
 	     (y3 == true))
 		return true;
@@ -116,10 +120,11 @@ static
 long _yy_passed_days(u16 y)
 {
 	long passed_days = 0;
-	passed_days  = (validate_number_u16(y) - 1) * 365;
-	passed_days += (validate_number_u16(y) - 1) / 4;
-	passed_days -= (validate_number_u16(y) - 1) / 100;
-	passed_days += (validate_number_u16(y) - 1) / 400;
+	y = validate_number_u16(y);
+	passed_days  = (y - 1) * 365;
+	passed_days += (y - 1) / 4;
+	passed_days -= (y - 1) / 100;
+	passed_days += (y - 1) / 400;
 	return passed_days;
 }
 
@@ -139,9 +144,9 @@ long _mm_passed_days(u8 m)
 	return passed_days;
 }
 
-long get_passed_days(u8 m, u8 y)
+long get_passed_days(u8 m, u16 y)
 {
-	long yy = 0, mm = 0;
+	u32 yy = 0, mm = 0;
    	bool leap_year = false;
 
 	leap_year = _leap_year(validate_number_u16(y));
@@ -156,14 +161,15 @@ long get_passed_days(u8 m, u8 y)
 	return yy + mm;
 }
 
-u8 number_of_week(u8 d, u8 m, u8 y)
+u8 number_of_week(u8 d, u8 m, u16 y)
 {
-	long days = get_passed_days(validate_number_u8(m), 
+	long days = get_passed_days(
+		validate_number_u8(m), 
 		validate_number_u16(y));
 	return (days + d) % 7;
 }
 
-void name_of_week(u8* buffer, u8 wn)
+void name_of_week(char* buffer, u8 wn)
 {
 	switch(wn) {
 	case 0: strncpy(buffer, "Sun", WEEK_OF_SIZE); break;
