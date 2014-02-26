@@ -81,25 +81,30 @@ bool _any_days_in_month(u8 index)
 static 
 void _set_days_in_month(u8 index, u8 value)
 {
+	index = validate_number_u8(index);
 	if( _any_days_in_month(index) == true )
 		return ;
+	value = validate_number_u8(value);
 	DAYS_IN_MONTH[index] = value;
 }
 
 static
 u8 _get_days_in_month(u8 index)
 {
+	u8 value = 0;
+	index = validate_number_u8(index);
 	if( _any_days_in_month(index) == true )
 		return (u8) INVALID_VALUE;
-	return DAYS_IN_MONTH[index];
+	value = validate_number_u8( DAYS_IN_MONTH[index] );
+	return value;
 }
 
 static
-bool _leap_year(u8 y)
+bool _leap_year(u16 y)
 {
-	bool y1 = (y %   4) == 0 ? true : false,
-	     y2 = (y % 100) != 0 ? true : false,
-	     y3 = (y % 400) == 0 ? true : false;
+	bool y1 = (validate_number_u16(y) %   4) == 0 ? true : false,
+	     y2 = (validate_number_u16(y) % 100) != 0 ? true : false,
+	     y3 = (validate_number_u16(y) % 400) == 0 ? true : false;
 	if( ((y1 == true) || (y2 != true)) && 
 	     (y3 == true))
 		return true;
@@ -111,10 +116,10 @@ static
 long _yy_passed_days(u16 y)
 {
 	long passed_days = 0;
-	passed_days  = (y - 1) * 365;
-	passed_days += (y - 1) / 4;
-	passed_days -= (y - 1) / 100;
-	passed_days += (y - 1) / 400;
+	passed_days  = (validate_number_u16(y) - 1) * 365;
+	passed_days += (validate_number_u16(y) - 1) / 4;
+	passed_days -= (validate_number_u16(y) - 1) / 100;
+	passed_days += (validate_number_u16(y) - 1) / 400;
 	return passed_days;
 }
 
@@ -139,21 +144,22 @@ long get_passed_days(u8 m, u8 y)
 	long yy = 0, mm = 0;
    	bool leap_year = false;
 
-	leap_year = _leap_year(y);
+	leap_year = _leap_year(validate_number_u16(y));
 	if(leap_year == true)
 		_set_days_in_month(1, 29);
 	else
 		_set_days_in_month(1, 28);
 
-	yy = _yy_passed_days(y);
-	mm = _mm_passed_days(m);
+	yy = _yy_passed_days(validate_number_u16(y));
+	mm = _mm_passed_days(validate_number_u8(m));
 
 	return yy + mm;
 }
 
 u8 number_of_week(u8 d, u8 m, u8 y)
 {
-	long days = get_passed_days(m, y);
+	long days = get_passed_days(validate_number_u8(m), 
+		validate_number_u16(y));
 	return (days + d) % 7;
 }
 
