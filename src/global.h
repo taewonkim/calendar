@@ -3,11 +3,6 @@
 
 #define INVALID_VALUE           255
 
-#define MAX_MONTH_COUNT          12
-#define WEEK_OF_SIZE              3
-#define DAYS_NORM_MONTH_TWO      28
-#define DAYS_LEAP_MONTH_TWO      29
-
 // redefine   signed type.
 typedef signed   char  s8;
 typedef signed   short s16;
