@@ -31,8 +31,12 @@ int main(int argc, char** argv)
 	// 5 - Friday    (금요일)
 	// 6 - Saturday  (토요일)
 	week_number = number_of_week(dd, mm, yy);
+	
+	//
+	// Get a week name.
+	// 
 	name_of_week(week_name, week_number);
-
+	
 	printf("WEEK = %s (%d)\n", week_name, week_number);
 
 	free(week_name);
