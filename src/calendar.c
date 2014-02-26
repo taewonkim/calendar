@@ -27,12 +27,21 @@ bool _underflw_days_in_month(int index)
 	return (index <     0) ? true : false;
 }
 
+static
+bool _any_days_in_month(int index)
+{
+	bool oflw = false, uflw = false;
+	if( _underflw_days_in_month(index) == true )
+		oflw = true;
+	if( _overflow_days_in_month(index) == true )
+		udfw = true;
+	return oflw || uflw;
+}
+
 static 
 void _set_days_in_month(int index, int value)
 {
-	if(_underflw_days_in_month(index) == true)
-		return ;
-	if(_overflow_days_in_month(index) == true)
+	if( _any_days_in_month(index) == true )
 		return ;
 	DAYS_IN_MONTH[index] = value;
 }
@@ -40,9 +49,7 @@ void _set_days_in_month(int index, int value)
 static
 int _get_days_in_month(int index)
 {
-	if(_underflw_days_in_month(index) == true)
-		return INVALID_VALUE;
-	if(_overflow_days_in_month(index) == true)
+	if( _any_days_in_month(index) == true )
 		return INVALID_VALUE;
 	return DAYS_IN_MONTH[index];
 }
@@ -50,11 +57,11 @@ int _get_days_in_month(int index)
 static
 bool _leap_year(int y)
 {
-	bool y1 = (y % 4)   == 0 ? true : false,
-		 y2 = (y % 100) != 0 ? true : false,
-		 y3 = (y % 400) == 0 ? true : false;
+	bool y1 = (y %   4) == 0 ? true : false,
+	     y2 = (y % 100) != 0 ? true : false,
+	     y3 = (y % 400) == 0 ? true : false;
 	if( ((y1 == true) || (y2 != true)) && 
-		 (y3 == true))
+	    (y3 == true))
 		return true;
 	else
 		return false;
