@@ -18,13 +18,17 @@ u32 validate_number_u32(u32 uv)
 static
 u16 validate_number_u16(u16 uv)
 {
-	return (u16) validate_number_u32(uv);
+	if( (uv & 0x00008000) == 0x00008000 )
+		uv = !(uv & 0x0000FFFF);
+	return uv;
 }
 
 static
 u8 validate_number_u8(u8 uv)
 {
-	return (u8)  validate_number_u16(uv);
+	if( (uv & 0x00000800) == 0x00000800 )
+		uv = !(uv & 0x000000FF);
+	return uv;
 }
 
 /**
