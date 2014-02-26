@@ -177,15 +177,16 @@ u8 number_of_week(u8 d, u8 m, u16 y)
 	return (days + d) % 7;
 }
 
-void name_of_week(char* buffer, u8 wn)
+void name_of_week(char* buffer, u8 week_number)
 {
-	switch(wn) {
-	case 0: strncpy(buffer, "Sun", WEEK_OF_SIZE); break;
-	case 1: strncpy(buffer, "Mon", WEEK_OF_SIZE); break;
-	case 2: strncpy(buffer, "Tue", WEEK_OF_SIZE); break;
-	case 3: strncpy(buffer, "Wed", WEEK_OF_SIZE); break;
-	case 4: strncpy(buffer, "Thu", WEEK_OF_SIZE); break;
-	case 5: strncpy(buffer, "Fri", WEEK_OF_SIZE); break;
-	case 6: strncpy(buffer, "Sat", WEEK_OF_SIZE); break;
+	switch(week_number) 
+	{
+		case 0: strncpy(buffer, "Sun", WEEK_OF_SIZE); break;
+		case 1: strncpy(buffer, "Mon", WEEK_OF_SIZE); break;
+		case 2: strncpy(buffer, "Tue", WEEK_OF_SIZE); break;
+		case 3: strncpy(buffer, "Wed", WEEK_OF_SIZE); break;
+		case 4: strncpy(buffer, "Thu", WEEK_OF_SIZE); break;
+		case 5: strncpy(buffer, "Fri", WEEK_OF_SIZE); break;
+		case 6: strncpy(buffer, "Sat", WEEK_OF_SIZE); break;
 	}
 }
