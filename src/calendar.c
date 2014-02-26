@@ -179,8 +179,8 @@ u8 number_of_week(u8 d, u8 m, u16 y)
 	long days = 0
 	m = validate_number_u8(m);
 	y = validate_number_u16(y);
-	days = get_passed_days(m, y);
 	d = validate_number_u8(d);
+	days  = get_passed_days(m, y);
 	days += d;
 	return (days % 7);
 }
