@@ -12,7 +12,7 @@ static
 u32 validate_number_u32(u32 uv)
 {
 	if( (uv & 0x80000000) == 0x80000000 )
-		uv = !(uv & 0xFFFFFFFF) + 1;
+		uv = (u32) (0xFFFFFFFF - (uv & 0xFFFFFFFF) + 1);
 	return uv;
 }
 */
@@ -20,16 +20,16 @@ u32 validate_number_u32(u32 uv)
 static
 u16 validate_number_u16(u16 uv)
 {
-	if( (uv & 0x8000) == 0x8000 )
-		uv = 0xFFFF - (uv & 0xFFFF) + 1;
+	if( (uv & 0x00008000) == 0x00008000 )
+		uv = (u16) (0x0000FFFF - (uv & 0x0000FFFF) + 1);
 	return uv;
 }
 
 static
 u8 validate_number_u8(u8 uv)
 {
-	if( (uv & 0x80) == 0x80 )
-		uv = 0xFF - (uv & 0xFF) + 1;
+	if( (uv & 0x00000080) == 0x00000080 )
+		uv = (u8)  (0x000000FF - (uv & 0x000000FF) + 1);
 	return uv;
 }
 
@@ -87,7 +87,6 @@ bool _any_days_in_month(u8 iv)
 	return oflw || uflw;
 }
 
-static 
 void _set_days_in_month(u8 iv, u8 uv)
 {
 	iv = validate_number_u8(iv);
@@ -97,7 +96,6 @@ void _set_days_in_month(u8 iv, u8 uv)
 	DAYS_IN_MONTH[iv] = uv;
 }
 
-static
 u8 _get_days_in_month(u8 iv)
 {
 	u8 uv = 0;
