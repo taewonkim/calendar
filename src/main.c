@@ -17,6 +17,19 @@ int main(int argc, char** argv)
 	printf("  DD = ");
 	scanf("%d", &dd);
 
+	//
+	// Get a week number.
+	// When return this function,
+	// follow you see number.
+	// It means next comment (split dash character).
+	//
+	// 0 - Sunday    (일요일)
+	// 1 - Monday    (월요일)
+	// 2 - Tuesday   (화요일)
+	// 3 - Wednesday (수요일)
+	// 4 - Thursday  (목요일)
+	// 5 - Friday    (금요일)
+	// 6 - Saturday  (토요일)
 	week_number = number_of_week(dd, mm, yy);
 	name_of_week(week_name, week_number);
 
