@@ -1,9 +1,9 @@
 #ifndef __H_GLOBAL__
 #define __H_GLOBAL__
 
-#define INVALID_VALUE	-1
+#define INVALID_VALUE	255
 
-#define WEEK_OF_SIZE	 3
+#define WEEK_OF_SIZE	  3
 
 // redefine   signed type.
 typedef signed   char  s8;
