@@ -10,7 +10,7 @@ static u8 DAYS_IN_MONTH[12] = {
 static
 u32 validate_number_u32(u32 uv)
 {
-	if( uv < 0 )
+	if( (uv & 0x80000000) == 0x80000000 )
 		uv = !(uv & 0xFFFFFFFF) + 1;
 	return uv;
 }
