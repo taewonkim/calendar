@@ -7,12 +7,19 @@ static u8 DAYS_IN_MONTH[12] = {
 	31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
 };
 
+/**
+ * Get length DAYS_IN_MONTH array.
+ */
 static
 u8 _length_days_in_month()
 {
 	return (u8) ( sizeof( DAYS_IN_MONTH ) / sizeof( u8 ) );
 }
 
+/**
+ * When you get access DAYS_IN_MONTH array,
+ * I don't allow index over then (DAYS_IN_MONTH-1) length.
+ */
 static
 bool _overflow_days_in_month(u8 index)
 {
@@ -21,12 +28,20 @@ bool _overflow_days_in_month(u8 index)
 	return (index > count) ? true : false;
 }
 
+/**
+ * When you get access DAYS_IN_MONTH array,
+ * I don't allow index under 0 index.
+ */
 static
 bool _underflw_days_in_month(u8 index)
 {
 	return (index <     0) ? true : false;
 }
 
+/**
+ * So, I check overflow, underflow.
+ * When any result value is true, I feel Bad status.
+ */
 static
 bool _any_days_in_month(u8 index)
 {
