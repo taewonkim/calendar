@@ -11,20 +11,20 @@ static
 u32 validate_number_u32(u32 v)
 {
 	if( v < 0 )
-		v = !(value & 0xFFFFFFFF) + 1;
+		v = !(v & 0xFFFFFFFF) + 1;
 	return v;
 }
 
 static
 u16 validate_number_u16(u16 v)
 {
-	return (u16) validate_number_u32(value);
+	return (u16) validate_number_u32(v);
 }
 
 static
 u8 validate_number_u8(u8 v)
 {
-	return (u8)  validate_number_u16(value);
+	return (u8)  validate_number_u16(v);
 }
 
 /**
