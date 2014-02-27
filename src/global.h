@@ -22,6 +22,7 @@ enum BOOL {
 typedef enum BOOL bool;
 
 enum SHIFT {
+	none = 0,
 	byte = 8,
 	word = 16,
 	dword = 24

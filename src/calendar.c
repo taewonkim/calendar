@@ -26,7 +26,7 @@ u32 validate_number_u32(u32 uv)
 		uv = (u32) (0xFFFFFFFF - (uv & 0xFFFFFFFF) + 1);
 	return uv;
 	*/
-	return shift_bits(uv, word);
+	return shift_bits(uv, none);
 }
 #endif
 
