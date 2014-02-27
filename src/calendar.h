@@ -4,6 +4,7 @@
 #include "global.h"
 
 #define WEEK_OF_SIZE              3
+#define DAYS_OF_WEEK              7
 #define MAX_MONTH_COUNT          12
 #define DAYS_NORM_MONTH_TWO      28
 #define DAYS_LEAP_MONTH_TWO      29

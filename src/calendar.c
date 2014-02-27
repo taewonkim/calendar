@@ -193,7 +193,7 @@ u8 number_of_week(u8 d, u8 m, u16 y)
 	y = validate_number_u16(y);
 	days  = get_passed_days(m, y);
 	days += d;
-	return (days % 7);
+	return (days % DAYS_OF_WEEK);
 }
 
 void name_of_week(char* buffer, u8 week_number)
