@@ -172,6 +172,7 @@ long get_passed_days(u8 m, u16 y)
    	bool leap_year = false;
 
    	y = validate_number_u16(y);
+	m = validate_number_u8(m);
 	leap_year = _leap_year(y);
 	if(leap_year == true)
 		_set_days_in_month(1, DAYS_LEAP_MONTH_TWO);
@@ -179,8 +180,8 @@ long get_passed_days(u8 m, u16 y)
 		if( _get_days_in_month(1) != DAYS_NORM_MONTH_TWO )
 			_set_days_in_month(1, DAYS_NORM_MONTH_TWO);
 
-	yy = _yy_passed_days(validate_number_u16(y));
-	mm = _mm_passed_days(validate_number_u8(m));
+	yy = _yy_passed_days(y);
+	mm = _mm_passed_days(m);
 
 	return yy + mm;
 }
