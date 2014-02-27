@@ -1,6 +1,8 @@
 #ifndef __H_CALENDAR__
 #define __H_CALENDAR__
 
+#include "global.h"
+
 #define WEEK_OF_SIZE              3
 #define MAX_MONTH_COUNT          12
 #define DAYS_NORM_MONTH_TWO      28

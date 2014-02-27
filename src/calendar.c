@@ -10,33 +10,46 @@ u8 DAYS_IN_MONTH[12] = {
 
 u32 shift_bits(u32 uv, shift udir)
 {
-	return 0;
+	u32 rv = 0x80000000 >> udir,
+	    tv = 0xFFFFFFFF >> udir;
+	if( (uv & rv) == rv)
+		uv = (u16) (tv - (uv & tv) + 1);
+	return uv;
 }
 
 #if 0
 static
 u32 validate_number_u32(u32 uv)
 {
+	/*
 	if( (uv & 0x80000000) == 0x80000000 )
 		uv = (u32) (0xFFFFFFFF - (uv & 0xFFFFFFFF) + 1);
 	return uv;
+	*/
+	return shift_bits(uv, word);
 }
 #endif
 
 static
 u16 validate_number_u16(u16 uv)
 {
+	/*
 	if( (uv & 0x00008000) == 0x00008000 )
 		uv = (u16) (0x0000FFFF - (uv & 0x0000FFFF) + 1);
 	return uv;
+	*/
+	return shift_bits(uv, word);
 }
 
 static
 u8 validate_number_u8(u8 uv)
 {
+	/*
 	if( (uv & 0x00000080) == 0x00000080 )
 		uv = (u8)  (0x000000FF - (uv & 0x000000FF) + 1);
 	return uv;
+	*/
+	return shift_bits(uv, dword);
 }
 
 /**
