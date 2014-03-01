@@ -2,7 +2,8 @@ Calendar implement by C Language
 ================================
 
 ## Clone Repository
-    $ git clone git@github.com:taewonkim/calendar_impl_c_language.git
+    $ git clone git@github.com:taewonkim/calendar_impl_c_language.git ./calendar
 
 ## Compile  
-    $ gcc -o calendar main.c calendar.c
+    $ cd ./calendar
+    $ gcc -o cal ./src/*.c
