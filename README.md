@@ -9,5 +9,10 @@ Calendar implement by C Language
     $ git clone https://github.com/taewonkim/calendar.git ./calendar
     
 ## Compile  
+### Release  
     $ cd ./calendar
     $ gcc -o cal ./src/*.c
+
+### Debug
+    $ cd ./calendar
+    $ gcc -g -Wall -o cal ./src/*.c
